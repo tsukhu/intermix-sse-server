@@ -1,0 +1,7 @@
+{
+  "name": "Start on Heroku: node sse server",
+  "description": "Node JS Server Sent Events Server",
+  "repository": "https://github.com/ERS-HCL/intermix-sse-server",
+  "keywords": ["node", "see", "heroku"],
+  "image": "heroku/nodejs"
+}
