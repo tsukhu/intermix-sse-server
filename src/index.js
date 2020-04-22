@@ -50,7 +50,10 @@ function eventsHandler(req, res, next) {
 
 // Iterate clients list and use write res object method to send new tms
 function sendEventsToAll(event) {
-  clients.forEach((c) => c.res.write(`data: ${JSON.stringify(event)}\n\n`));
+  clients.forEach((c) => {
+    c.res.write(`data: ${JSON.stringify(event)}\n\n`); 
+    c.res.flush();
+  });
 }
 
 // Set cors and bodyParser middlewares
