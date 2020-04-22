@@ -13,7 +13,7 @@ function getData(times) {
 
 function getGroupData() {
   var result = [];
-  ["group A","group B","group C","group D"].forEach(function(i) {
+  ["group A","group B","group C","group D", "group E"].forEach(function(i) {
     result.push({
       id: i,
       data: getData(50)
