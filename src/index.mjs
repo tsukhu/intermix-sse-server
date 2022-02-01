@@ -1,7 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const events = require('./generateNextEvent.js');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import * as events from './generateNextEvent.mjs';
 
 const app = express();
 
@@ -15,7 +15,7 @@ function eventsHandler(req, res, next) {
     'Cache-Control': 'no-cache',
   };
   res.writeHead(200, headers);
-
+  res.flushHeaders(); 
   // After client opens connection send all dispatches as string
   //const data = `data: ${JSON.stringify(dispatches)}\n\n`;
   //res.write(data);
@@ -45,14 +45,15 @@ function eventsHandler(req, res, next) {
       const event = events.generateNextEvent();
       sendEventsToAll(event);
     }
-  }, 20000);
+  }, 7000);
 }
 
 // Iterate clients list and use write res object method to send new tms
 function sendEventsToAll(event) {
   clients.forEach((c) => {
+    
     c.res.write(`data: ${JSON.stringify(event)}\n\n`); 
-    c.res.flush();
+
   });
 }
 
